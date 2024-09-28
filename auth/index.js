@@ -63,22 +63,4 @@ router.get('/logout', async (req, res) => {
   res.json({ error: false, message: "Oturum kapatıldı." });
 });
 
-router.get("/test", async (req, res) => {
-  try {
-    const cookie = req.cookies['jwt']
-    const claims = jwt.verify(cookie, process.env.JWT_SECRET)
-
-    if (!claims) {
-      return res.status(401).json({ error: true, message: "Aktif oturum bulunamadı." })
-
-    }
-    const employee = await Employee.findOne({ _id: claims._id })
-    if (!employee) {
-      return res.status(401).json({ error: true, message: "Aktif oturum bulunamadı." })
-    }
-    res.json({ error: false, message: employee });
-  } catch (error) {
-    return res.status(401).json({ error: true, message: "Aktif oturum bulunamadı." })
-  }
-});
 module.exports = router;
