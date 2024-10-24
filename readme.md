@@ -246,6 +246,23 @@ VERİLER ÖRNEKTİR GERÇEKLİĞİ YOKTUR!
 - **Data:**
     Düzenlenmiş Oda Verisi
 
+  
+#### PUT `/api/room/status/{id}`
+
+- **Açıklama:** ID'ye sahip odanın durumunu düzenler.
+- **Path Parametreleri:**
+    - `id` (CustomID): Odanın ID'si.
+- **Request Body:**
+    - **Content-Type:** `application/json`
+    - **Body:**
+        ```json
+        {
+            "status": "STATUS(str)" // "Kirli", "Temiz", "Temizleniyor", "Bakım Gerekli" değerlerinden biri olmak zorunda!
+        }
+        ```
+- **Data:**
+    Düzenlenmiş Oda Verisi
+
 #### DELETE `/api/room/{id}`
 
 - **Açıklama:** ID'ye sahip odayı siler.
