@@ -6,6 +6,6 @@ router.post("/", createReservation);
 router.delete("/:id", deleteReservation);
 router.put("/:id", editReservation)
 router.get("/:id", getReservation)
-router.get("/", getAllReservations)
+router.get("/", getAllReservations);
 
 module.exports = router;

@@ -37,6 +37,7 @@ const errorMessages = {
         enterUnusedRoomNumber: "Lütfen kullanılmayan bir oda numarası girin.",
         enterRoomName: "Lütfen bir oda ismi girin.",
         selectValidRoom: "Lütfen geçerli bir oda seçin.",
+        enterValidStatus: "Lütfen geçerli bir bakım durumu girin.",
     },
     customer: {
         selectValidCustomer: "Lütfen geçerli bir müşteri seçin.",
@@ -66,6 +67,7 @@ const successMessages = {
         roomEdited: "Oda düzenlendi.",
         roomSended: "Oda gönderildi.",
         allRoomsSended: "Tüm odalar gönderildi.",
+        roomStatusEdited: "Oda durumu güncellendi."
     },
     customer: {
         customerCreated: "Müşteri oluşturuldu.",

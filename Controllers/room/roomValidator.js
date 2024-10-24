@@ -4,7 +4,7 @@ const { errorMessages } = require("../../Middleware/messages");
 
 const roomValidator = {
     room: async (roomID) => {
-        if (!roomID || !customIdRegex.test(roomID) || !await Room.findOne({customId: roomID}))
+        if (!roomID || !customIdRegex.test(roomID) || !await Room.findOne({ customId: roomID }))
             return errorMessages.room.selectValidRoom;
 
         return false;
@@ -14,7 +14,7 @@ const roomValidator = {
             if (!customIdRegex.test(roomID))
                 return false;
 
-            const roomFromID = await Room.findOne({customId: roomID});
+            const roomFromID = await Room.findOne({ customId: roomID });
             if (roomFromID.roomNumber == roomNumber)
                 return false;
         }
@@ -23,6 +23,15 @@ const roomValidator = {
 
         return false
     },
+    checkStatus: async (roomStatus) => {
+        if (!roomStatus)
+            return errorMessages.room.enterValidStatus
+
+        if (!["Temiz", "Temizleniyor", "Kirli", "Bakım Gerekli"].includes(roomStatus))
+            return errorMessages.room.enterValidStatus
+
+        return false
+    }
 };
 
 module.exports = roomValidator;

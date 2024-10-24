@@ -20,18 +20,18 @@ const operation = async (req, res) => {
         if (oldReservation) {
             await Promise.all([
                 ...oldReservation.rooms.map(async (roomID) => {
-                    const room = await Room.findOne({ customId: roomID });
-                    if (room) {
-                        room.reservations = room.reservations.filter(reservation => reservation.toString() !== req.params.id);
-                        await room.save();
-                    }
+                    await Room.findOneAndUpdate(
+                        { customId: roomID },
+                        { $pull: { reservations: req.params.id } },
+                        { new: true }
+                    );
                 }),
                 ...oldReservation.customers.map(async (customerID) => {
-                    const customer = await Customer.findOne({ customId: customerID });
-                    if (customer) {
-                        customer.reservations = customer.reservations.filter(reservation => reservation.toString() !== req.params.id);
-                        await customer.save();
-                    }
+                    await Customer.findOneAndUpdate(
+                        { customId: customerID },
+                        { $pull: { reservations: req.params.id } },
+                        { new: true }
+                    );
                 })
             ]);
         }
@@ -40,15 +40,22 @@ const operation = async (req, res) => {
             ...rooms.map(async (roomID) => {
                 const room = await Room.findOne({ customId: roomID });
                 if (room && !room.reservations.includes(req.params.id)) {
-                    room.reservations.push(req.params.id);
-                    await room.save();
+                    await Room.findOneAndUpdate(
+                        { customId: roomID },
+                        { $push: { reservations: req.params.id } },
+                        { new: true }
+                    );
                 }
             }),
             ...customers.map(async (customerID) => {
                 const customer = await Customer.findOne({ customId: customerID });
                 if (customer && !customer.reservations.includes(req.params.id)) {
-                    customer.reservations.push(req.params.id);
-                    await customer.save();
+                    await Customer.findOneAndUpdate(
+                        { customId: customerID },
+                        { $push: { reservations: req.params.id } },
+                        { new: true }
+                    );
+
                 }
             })
         ]);

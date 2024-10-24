@@ -7,7 +7,7 @@ const { errorMessages, successMessages } = require("../../Middleware/messages");
 const operation = async (req, res) => {
     try {
         const oldEmployee = await Employee.findOne({ customId: req.params.id });
-        const { name, job, salary, jobStartDate, jobDescription, tckn, phone, email, address, note, dob, password, permissions } = req.body;
+        const { name, job, salary, jobStartDate, jobDescription, tckn, phone, email, address, note, dob, permissions } = req.body;
 
         const newEmployee = await Employee.findOneAndUpdate({ customId: req.params.id }, {
             name,
@@ -23,7 +23,6 @@ const operation = async (req, res) => {
             },
             note: note || "",
             dob,
-            password,
             permissions
         },
         { new: true });

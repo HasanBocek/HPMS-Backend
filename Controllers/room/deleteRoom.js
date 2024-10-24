@@ -9,7 +9,7 @@ const operation = async (req, res) => {
         const room = await Room.findOne({ customId: req.params.id }).exec();
         if (room.reservations.length > 0) {
             room.reservations.forEach(async reservationId => {
-                await Reservation.updateOne(
+                await Reservation.findOneAndUpdate(
                     { customId: reservationId },
                     { $pull: { rooms: req.params.id } }
                 );

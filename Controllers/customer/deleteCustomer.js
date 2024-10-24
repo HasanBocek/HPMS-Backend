@@ -9,7 +9,7 @@ const operation = async (req, res) => {
         const customer = await Customer.findOne({ customId: req.params.id }).exec();
         if (customer.reservations.length > 0) {
             customer.reservations.forEach(async reservationId => {
-                await Reservation.updateOne(
+                await Reservation.findOneAndUpdate(
                     { customId: reservationId },
                     { $pull: { customers: req.params.id } }
                 );

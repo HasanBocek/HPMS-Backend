@@ -43,11 +43,12 @@ router.post('/login', async (req, res) => {
       return res.status(200).json(responseBody);
     }
     const token = jwt.sign({ _id: employee._id }, process.env.JWT_SECRET);
-
     res.cookie('jwt', token, {
       httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000
+      maxAge: 24 * 60 * 60 * 1000,
+      secure: false,
     })
+
     responseBody = { error: false, message: "Oturum başarılı bir şekilde açıldı." };
 
     res.status(200).json(responseBody);

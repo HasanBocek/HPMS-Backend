@@ -100,13 +100,14 @@ const checkPermission = async (employee, perms) => {
 
 const fetchEmployee = async (req) => {
     try {
-        const token = req.cookies.jwt || "";
+        const token = await req.cookies.jwt || "";  
         if (!token) {
             responseBody = {
                 status: "error",
                 message: errorMessages.template.authorizationError,
                 error: [errorMessages.template.permissionError]
             };
+
             code = 401;
             return null;
         }

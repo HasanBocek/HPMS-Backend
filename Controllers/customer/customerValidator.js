@@ -1,4 +1,4 @@
-const Customer = require("../../models/Room");
+const Customer = require("../../models/Customer");
 const customIdRegex = /^[0-9A-Z]{4}$/
 const { errorMessages } = require("../../Middleware/messages");
 

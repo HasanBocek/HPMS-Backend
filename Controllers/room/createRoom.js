@@ -18,7 +18,6 @@ const operation = async (req, res) => {
                 note: note || ""
             }
         });
-
         return {
             statusCode: 200,
             status: "success",

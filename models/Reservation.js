@@ -19,6 +19,33 @@ const reservationSchema = new mongoose.Schema({
   price: { type: Number, required: false },
   note: { type: String, required: false },
   isPaid: { type: Boolean, required: false, default: false },
+  actionHistory: {
+    before: {
+      employee: { type: String },
+      customers: [{ type: String }],
+      rooms: [{ type: String }],
+      checkin: { type: String },
+      checkout: { type: String },
+      adults: { type: Number },
+      childs: { type: Number },
+      price: { type: Number },
+      note: { type: String },
+      isPaid: { type: Boolean },
+    },
+    after: {
+      employee: { type: String },
+      customers: [{ type: String }],
+      rooms: [{ type: String }],
+      checkin: { type: String },
+      checkout: { type: String },
+      adults: { type: Number },
+      childs: { type: Number },
+      price: { type: Number },
+      note: { type: String },
+      isPaid: { type: Boolean },
+    },
+    modifiedAt: { type: String }
+  }
 });
 
 reservationSchema.pre('save', async function (next) {
@@ -43,6 +70,70 @@ reservationSchema.pre('save', async function (next) {
     }
 
     this.customId = id;
+
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+reservationSchema.pre("findOneAndUpdate", async function (next) {
+  try {
+    const reservationId = this.getQuery().customId;
+    const oldReservation = await mongoose.model('Reservation').findOne({ customId: reservationId }).lean();
+
+    if (oldReservation && oldReservation.actionHistory) {
+      delete oldReservation.actionHistory;
+    }
+    this._oldReservation = oldReservation;
+
+    next()
+  } catch (error) {
+    next(error)
+  }
+})
+
+reservationSchema.post('findOneAndUpdate', async function (result, next) {
+  try {
+    if (!result) return next();
+    const after = result.toObject();
+    const before = this._oldReservation
+
+    function compareAndLogChanges(before, after) {
+      const historyEntry = {
+        before: before,
+        after: {},
+        modifiedAt: new Date().toISOString(),
+      };
+      const arraysAreEqual = (arr1, arr2) => {
+        if (!arr1 && !arr2) return true;
+        if (arr1.length !== arr2.length) return false;
+
+        return arr1.every((value, index) => value === arr2[index]);
+      };
+
+      Object.keys(after).forEach(key => {
+        if (key === "actionHistory") return;
+        const isArray = Array.isArray(before[key]) && Array.isArray(after[key]);
+
+        if (isArray) {
+          if (!arraysAreEqual(before[key], after[key])) {
+            historyEntry.after[key] = after[key];
+          }
+        } else if (JSON.stringify(before[key]) !== JSON.stringify(after[key])) {
+          if (!isObject(before[key])) {
+            historyEntry.after[key] = after[key];
+          }
+        }
+      });
+
+      return historyEntry;
+    }
+
+    await mongoose.model('Reservation').updateOne(
+      { _id: result._id },
+      { $push: { actionHistory: compareAndLogChanges(before, after) } }
+    );
 
     next();
   } catch (err) {
