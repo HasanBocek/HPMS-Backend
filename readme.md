@@ -1,50 +1,50 @@
-# Otel Yönetim Sistemi (HOTEL PROPERTY MANAGEMENT SYSTEM)
+# HOTEL MANAGEMENT SYSTEM
 
-Bu proje, otel yönetimi için rezervasyon, müşteri, çalışan ve oda yönetimi gibi işlemleri yapan bir uygulama programalama arabirimidir.
+This projects is an API for hotel management that performs reservation, customer, employee and room management.
 
-## Özellikler
+## Features
 
-- Müşteri, çalışan, oda ve rezervasyon yönetimi.
-- Oda rezervasyonları için tarih kontrolü.
-- Rezervasyon, müşteri, çalışan ve oda CRUD işlemleri.
+- Customer, employee, room and reservation management.
+- Date control for room reservations.
+- Reservation, customer, employee and room CRUD operations.
 
-## Teknolojiler
+## Technologies
 
 - **Backend:** Node.js, Express.js
-- **Veritabanı:** MongoDB, Mongoose
+- **Database:** MongoDB, Mongoose
 
-## Kurulum
+## Setup
 
-### Gereksinimler
+### Requirements
 
 - Node.js
 - MongoDB
 
-### Adımlar
+### Steps
 
-1. Projeyi klonlayın:
+1. Clone the project:
    ```bash
    git clone https://github.com/HasanBocek/HPMS-Backend.git
    cd HPMS-Backend
    ```
-2. Bağımlılıkları yükleyin:
+2. Install dependencies:
    ```bash
    npm install
    ```
-3. MongoDB'yi başlatın ve `.env` dosyasını yapılandırın:
+3. Configure `.env` file:
    ```env
    MONGODB_URI=
    SECRET=
    ```
-4. Sunucuyu çalıştırın:
+4. Start server:
    ```bash
    npm start
    ```
-5. Projeniz `localhost:4000` adresinde çalışacaktır.
+5. Project will be running on `localhost:4000`
 
-## API Dökümantasyonu
+## API Documentation
 
-### Response Yapısı
+### Response Structure
 
 - **Body**
     ```json
@@ -56,24 +56,22 @@ Bu proje, otel yönetimi için rezervasyon, müşteri, çalışan ve oda yöneti
     }
     ```
 
-VERİLER ÖRNEKTİR GERÇEKLİĞİ YOKTUR!
-
-### Item İşlemleri
+### Item Operations
 
 #### GET `/api/item/:id`
 
-- **Açıklama:** ID'ye sahip veriyi listeler.
-- **Path Parametreleri:**
-    - `id` (CustomID): Müşterinin ID'si.
+- **Description:** List the data by ID.
+- **Path Parameters:**
+    - `id` (CustomID): Item ID.
 
 - **Response Data:**
-    Item Verisi
+    Item Data
 
-### Müşteri İşlemleri
+### Customer Operations
 
 #### GET `/api/customer`
 
-- **Açıklama:** Tüm müşterileri listeler.
+- **Description:** List all customers.
 - **Data:**
     ```json
     [
@@ -101,77 +99,76 @@ VERİLER ÖRNEKTİR GERÇEKLİĞİ YOKTUR!
 
 #### GET `/api/customer/{id}`
 
-- **Açıklama:** ID'ye sahip müşteriyi listeler.
+- **Description:** List the customer by ID.
 - **Data:**
-    Müşteri Verisi
+    Customer Data
 
 #### POST `/api/customer`
 
-- **Açıklama:** Yeni bir müşteri oluşturur.
+- **Description:** Create a new customer.
 - **Request Body:**
     - **Content-Type:** `application/json`
     - **Body:**
         ```json
         {
-            "name": "ADSOYAD(str)",
-            "tckn": "TCKN(str)",
-            "address": "ADRES(str)",
-            "email": "EMAIL(str)",
-            "gender": "CINSIYET(str)",
-            "phone": "TELEFON_NO(int)",
-            "nation": "UYRUK_KODU(str)",
-            "note": "NOT(gerekli degil)(str)"
+            "name": "(str)",
+            "tckn": "SSN-TCKN-PASSPORTNO(str)",
+            "address": "(str)",
+            "email": "(str)",
+            "gender": "(str)",
+            "phone": "(int)",
+            "nation": "(str)",
+            "note": "(not required)(str)"
         }
         ```
 - **Response Data:**
-    Müşteri Verisi
+    Customer Data
 
 #### PUT `/api/customer/{id}`
 
-- **Açıklama:** ID'ye sahip müşteri düzenler.
-- **Path Parametreleri:**
-    - `id` (CustomID): Müşterinin ID'si.
+- **Description:** Edit the customer by ID.
+- **Path Parameters:**
+    - `id` (CustomID): Customer ID.
 - **Request Body:**
     - **Content-Type:** `application/json`
     - **Body:**
         ```json
         {
-            "name": "ADSOYAD(str)",
-            "tckn": "TCKN(str)",
-            "address": "ADRES(str)",
-            "email": "EMAIL(str)",
-            "gender": "CINSIYET(str)",
-            "phone": "TELEFON_NO(int)",
-            "nation": "UYRUK_KODU(str)",
-            "note": "NOT(gerekli degil)(str)"
-        }
+            "name": "(str)",
+            "tckn": "SSN-TCKN-PASSPORTNO(str)",
+            "address": "(str)",
+            "email": "(str)",
+            "gender": "(str)",
+            "phone": "(int)",
+            "nation": "(str)",
+            "note": "(not required)(str)"
+        } 
         ```
 - **Response Data:**
-    Düzenlenmiş Müşteri Verisi
+    Edited Customer Data
 
 #### DELETE `/api/customer/{id}`
 
-- **Açıklama:** ID'ye sahip müşteriyi siler.
-- **Path Parametreleri:**
-    - `id` (CustomID): Müşterinin ID'si.
+- **Description:** List the customer by ID.
+- **Path Parameters:**
+    - `id` (CustomID): Customer ID.
 
-### Oda İşlemleri
+### Room Operations
 
 #### GET `/api/room`
 
-- **Açıklama:** Tüm odaları listeler.
+- **Description:** List all rooms.
 - **Data:**
     ```json
     [
         {
             "_id": "66f56198c7e96e81b3556d7b",
             "roomType": {
-                "roomName": "Oda 1",
+                "roomName": "Room 1",
                 "price": 400,
                 "adults": 2,
                 "childs": 0,
-                "note": "",
-                "_id": "66f56198c7e96e81b3556d7c"
+                "note": ""
             },
             "roomNumber": 1,
             "note": "",
@@ -189,91 +186,91 @@ VERİLER ÖRNEKTİR GERÇEKLİĞİ YOKTUR!
 
 #### GET `/api/room?checkInDate=YYYY-MM-DD&checkOutDate=YYYY-MM-DD`
 
-- **Description:** Belirtilen tarihler arasındaki boş odaları listeler.
-- **Query Parametreleri:**
-    - `checkInDate` (Date[YYYY-MM-DD]): Checkin Tarihi.
-    - `checkOutDate` (Date[YYYY-MM-DD]): Checkout Tarihi.
+- **Description:** List the empty rooms between the specified dates.
+- **Query Parameters:**
+    - `checkInDate` (Date[YYYY-MM-DD]): Checkin Date.
+    - `checkOutDate` (Date[YYYY-MM-DD]): Checkout Date.
 - **Data:**
-    Müsait Odaların Verisi
+    Available Rooms Data
 
 #### GET `/api/room/{id}`
 
-- **Description:** ID'ye sahip odayı listeler.
-- **Path Parametreleri:**
-    - `id` (CustomID): Odanın ID'si.
+- **Description:** List the room by ID.
+- **Path Parameters:**
+    - `id` (CustomID): Room ID.
 - **Data:**
-    Oda Verisi
+    Room Data
 
 #### POST `/api/room`
 
-- **Açıklama:** Yeni bir oda oluşturur.
+- **Description:** Create a new room.
 - **Request Body:**
     - **Content-Type:** `application/json`
     - **Body:**
         ```json
         {
-            "roomNumber": "ODA_NO(int)",
-            "roomName": "ODA_ADI(str)",
-            "price": "FIYAT(int)",
-            "description": "ACIKLAMA(str)",
-            "adults": "YETISKIN_SAYISI(int)",
-            "childs": "COCUK_SAYISI(int)",
-            "note": "NOT(gerekli değil)(str)"
+            "roomNumber": "(int)",
+            "roomName": "(str)",
+            "price": "(int)",
+            "description": "(str)",
+            "adults": "(int)",
+            "childs": "(int)",
+            "note": "(not required)(str)"
         }
         ```
 - **Data:**
-    Oda Verisi
+    Room Data
 
 #### PUT `/api/room/{id}`
 
-- **Açıklama:** ID'ye sahip odayı düzenler.
-- **Path Parametreleri:**
-    - `id` (CustomID): Odanın ID'si.
+- **Description:** Edit the room by ID.
+- **Path Parameters:**
+    - `id` (CustomID): Room ID.
 - **Request Body:**
     - **Content-Type:** `application/json`
     - **Body:**
         ```json
         {
-            "roomNumber": "ODA_NO(int)",
-            "roomName": "ODA_ADI(str)",
-            "price": "FIYAT(int)",
-            "description": "ACIKLAMA(str)",
-            "adults": "YETISKIN_SAYISI(int)",
-            "childs": "COCUK_SAYISI(int)",
-            "note": "NOT(gerekli degil)(str)"
+            "roomNumber": "(int)",
+            "roomName": "(str)",
+            "price": "(int)",
+            "description": "(str)",
+            "adults": "(int)",
+            "childs": "(int)",
+            "note": "(not required)(str)"
         }
         ```
 - **Data:**
-    Düzenlenmiş Oda Verisi
+    Edited Room Data
 
   
 #### PUT `/api/room/status/{id}`
 
-- **Açıklama:** ID'ye sahip odanın durumunu düzenler.
-- **Path Parametreleri:**
-    - `id` (CustomID): Odanın ID'si.
+- **Description:** Edit the room status by ID.
+- **Path Parameters:**
+    - `id` (CustomID): Room ID.
 - **Request Body:**
     - **Content-Type:** `application/json`
     - **Body:**
         ```json
         {
-            "status": "STATUS(str)" // "Kirli", "Temiz", "Temizleniyor", "Bakım Gerekli" değerlerinden biri olmak zorunda!
+            "status": "(str)" // "Dirty", "Clean", "Cleaning", "Maintenance Required"
         }
         ```
 - **Data:**
-    Düzenlenmiş Oda Verisi
+    Edited Room Data
 
 #### DELETE `/api/room/{id}`
 
-- **Açıklama:** ID'ye sahip odayı siler.
-- **Path Parametreleri:**
-  - `id` (CustomID): Odanın ID'si.
+- **Description:** Delete the room by ID.
+- **Path Parameters:**
+    - `id` (CustomID): Room ID.
 
-### Rezervasyon İşlemleri
+### Reservation Operations
 
 #### GET `/api/reservation`
 
-- **Açıklama:** Tüm rezervasyonları listeler.
+- **Description:** List all reservations.
 - **Data:**
     ```json 
     [
@@ -301,67 +298,67 @@ VERİLER ÖRNEKTİR GERÇEKLİĞİ YOKTUR!
 
 #### GET `/api/reservation/{id}`
 
-- **Açıklama:** ID'ye sahip rezervasyonu listeler.
-- **Path Parametreleri:**
-    - `id` (CustomID): Rezervasyonun ID'si.
+- **Description:** List the reservation by ID.
+- **Path Parameters:**
+    - `id` (CustomID): Reservation ID.
 - **Data:**
-    Rezervasyon Verisi
+    Reservation Data
 
 #### POST `/api/reservation`
 
-- **Açıklama:** Yeni bir rezervasyon oluşturur.
+- **Description:** Create a new reservation.
 - **Request Body:**
     - **Content-Type:** `application/json`
     - **Body:**
         ```json
         {
-            "customers": "MUSTERI_ID(arr)",
-            "rooms": "ODA_ID(arr)",
-            "checkin": "CHECKIN-TARIH(YYYY-MM-DD)(str)",
-            "checkout": "CHECKOUT_TARIH(YYYY-MM-DD)(str)",
-            "adults": "YETISKIN_SAYISI(int)",
-            "childs": "COCUK_SAYISI(int)",
-            "note": "NOT(gerekli degil)(str)",
-            "isPaid": "ODEME_DURUMU(bool)"
+            "customers": "CUSTOMERID(arr)",
+            "rooms": "ROOMID(arr)",
+            "checkin": "(YYYY-MM-DD)(str)",
+            "checkout": "(YYYY-MM-DD)(str)",
+            "adults": "(int)",
+            "childs": "(int)",
+            "note": "(not required)(str)",
+            "isPaid": "PAYMENT-STATUS(bool)"
         }
         ```
 - **Data:**
-    Rezervasyon Verisi
+    Reservation Data
 
 #### PUT `/api/reservation/{id}`
 
-- **Açıklama:** ID'ye sahip rezervasyonu düzenler.
-- **Path Parametreleri:**
-    - `id` (CustomID): Rezervasyonun ID'si.
+- **Description:** Edit the reservation by ID.
+- **Path Parameters:**
+    - `id` (CustomID): Reservation ID.
 - **Request Body:**
     - **Content-Type:** `application/json`
     - **Body:**
         ```json
         {
-            "customers": "MUSTERI_ID(arr)",
-            "rooms": "ODA_ID(arr)",
-            "checkin": "CHECKIN-TARIH(YYYY-MM-DD)(str)",
-            "checkout": "CHECKOUT_TARIH(YYYY-MM-DD)(str)",
-            "adults": "YETISKIN_SAYISI(int)",
-            "childs": "COCUK_SAYISI(int)",
-            "note": "NOT(gerekli degil)(str)",
-            "isPaid": "ODEME_DURUMU(bool)"
+            "customers": "(arr)",
+            "rooms": "(arr)",
+            "checkin": "(YYYY-MM-DD)(str)",
+            "checkout": "(YYYY-MM-DD)(str)",
+            "adults": "(int)",
+            "childs": "(int)",
+            "note": "(not required)(str)",
+            "isPaid": "(bool)"
         }
         ```
 - **Data:**
-    Düzenlenmiş Rezervasyon Verisi
+    Edited Reservation Data
         
 #### DELETE `/api/reservation/{id}`
 
-- **Açıklama:** ID'ye sahip rezervasyonu siler.
-- **Path Parametreleri:**
-    - `id` (CustomID): Rezervasyonun ID'si.
+- **Description:** Delete the reservation by ID.
+- **Path Parameters:**
+    - `id` (CustomID): Reservation ID.
 
-### Çalışan İşlemleri
+### Employee Operations
 
 #### GET `/api/employee`
 
-- **Açıklama:** Tüm çalışanları listeler.
+- **Description:** List all employees.
 - **Data:**
     ```json
     [
@@ -392,94 +389,94 @@ VERİLER ÖRNEKTİR GERÇEKLİĞİ YOKTUR!
 
 #### GET `/api/employee/{id}`
 
-- **Açıklama:** ID'ye sahip çalışanları listeler.
-- **Path Parametreleri:**
-    - `id` (CustomID): Çalışan ID'si.
+- **Description:** List the employee by ID.
+- **Path Parameters:**
+    - `id` (CustomID): Employee ID.
 - **Data:**
-    Çalışan Verisi
+    Employee Data
 
 #### POST `/api/employee`
 
-- **Açıklama:** Yeni bir çalışan oluşturur.
+- **Description:** Create a new employee.
 - **Request Body:**
     - **Content-Type:** `application/json`
     - **Body:**
         ```json
         {
-            "name": "ADSOYAD(str)",
-            "job": "IS(str)",
-            "salary": "MAAS(int)",
-            "jobStartDate": "IS_BASLAMA_TARIHI(str)",
-            "jobDescription": "IS_ACIKLAMASI(str)",
-            "tckn": "TCKN(str)",
-            "phone": "TELEFON_NO(int)",
-            "email": "EMAIL(str)",
-            "address": "ADRES(str)",
-            "dob": "DOGUM_TARIH(YYYY-MM-DD)(str)",
-            "password": "SIFRE(str)",
-            "permissions": "YETKILER(arr)"
+            "name": "(str)",
+            "job": "(str)",
+            "salary": "(int)",
+            "jobStartDate": "(str)",
+            "jobDescription": "(str)",
+            "tckn": "(str)",
+            "phone": "(int)",
+            "email": "(str)",
+            "address": "(str)",
+            "dob": "(YYYY-MM-DD)(str)",
+            "password": "(str)",
+            "permissions": "(arr)"
         }
         ```
 - **Data:**
-    Çalışan Verisi
+    Employee Data
 
 #### PUT `/api/employee/{id}`
 
-- **Açıklama:** ID'ye sahip çalışanı düzenler.
-- **Path Parametreleri:**
-    - `id` (CustomID): Çalışanın ID'si.
+- **Description:** Edit the employee by ID.
+- **Path Parameters:**
+    - `id` (CustomID): Employee ID.
 - **Request Body:**
     - **Content-Type:** `application/json`
     - **Body:**
         ```json
         {
-            "name": "ADSOYAD(str)",
-            "job": "IS(str)",
-            "salary": "MAAS(int)",
-            "jobStartDate": "IS_BASLAMA_TARIHI(str)",
-            "jobDescription": "IS_ACIKLAMASI(str)",
-            "tckn": "TCKN(str)",
-            "phone": "TELEFON_NO(int)",
-            "email": "EMAIL(str)",
-            "address": "ADRES(str)",
-            "dob": "DOGUM_TARIH(YYYY-MM-DD)(str)",
-            "password": "SIFRE(str)",
-            "permissions": "YETKILER(arr)"
+            "name": "(str)",
+            "job": "(str)",
+            "salary": "(int)",
+            "jobStartDate": "(str)",
+            "jobDescription": "(str)",
+            "tckn": "(str)",
+            "phone": "(int)",
+            "email": "(str)",
+            "address": "(str)",
+            "dob": "(YYYY-MM-DD)(str)",
+            "password": "(str)",
+            "permissions": "(arr)"
         }
         ```
 - **Data:**
-    Düzenlenmiş Çalışan Verisi
+    Edited Employee Data
         
 #### DELETE `/api/employee/{id}`
 
-- **Açıklama:** ID'ye sahip çalışanı siler.
-- **Path Parametreleri:**
-    - `id` (CustomID): Çalışanın ID'si.
+- **Description:** Delete the employee by ID.
+- **Path Parameters:**
+    - `id` (CustomID): Employee ID.
 
-### Yetkilendirme İşlemleri
+### Authorization Operations
 
 #### POST `/auth/login`
 
-- **Açıklama:** Giriş yapar.
+- **Description:** Login.
 - **Request Body:**
     - **Content-Type:** `application/json`
     - **Body:**
         ```json
         {
-            "email": "EMAIL(str)",
-            "password": "SIFRE(str)"
+            "email": "(str)",
+            "password": "(str)"
         }
         ```
 
 #### GET `/auth/logout`
 
-- **Açıklama:** Çıkış yapar.
+- **Description:** Logout.
 - **Response:**
     - **Status:** `200 OK`
     - **Headers:**
         - `Location: /login`
 
-## Katkıda Bulunma
+## Contributing
 
-- **Pull Request:** Kod üzerinde değişiklik yapmak isterseniz, lütfen bir pull request gönderin.
-- **Issue:** Hataları veya geliştirme önerilerinizi Issue olarak bildirin.
+- **Pull Request:** If you want to make changes to the code, please send a pull request.
+- **Issue:** Report bugs or development suggestions as issues.
